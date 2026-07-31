@@ -1,0 +1,678 @@
+{
+    "user_info": {
+        "user_name": "余快",
+        "user_id": "ZT28260"
+    },
+    "special_characters_unicode": {
+        "characters": "[\\uFF0C\\u2022\\u2500-\\u257F\\u201D\\u2019\\u0300-\\u03FF\\uFFF0-\\uFFFF\\u2000-\\u206F\\u2764\\uFE0F\\u2700-\\u27BF\\u0600-\\u06FF\\uE000-\\uE0FF\\u2070-\\u209F\\u2300-\\u23FF\\u2600-\\u26FF]"
+    },
+    "osm_data_query": {
+        "describe": "预报订单管理搜索",
+        "search_parm_describe": "condes 订单列表、country_code 国家二字节码、server_code 渠道代码",
+        "search_parm_describe2": "ops_time_start 时间格式为秒数 需要使用 TimeCalculator、customer_id 客户代码",
+        "headers": {
+            "Host": "oms2api.yunexpress.com",
+            "User-Agent": "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1;.NET CLR 2.0.50727; .NET CLR 3.0.04506.30)",
+            "Content-Length": "361",
+            "__lang": "zh-cn",
+            "Content-Type": "application/json; charset=utf-8",
+            "Expect": "100-continue",
+            "Connection": "Close"
+        },
+        "json_": {
+            "query": {
+                "codes": null,
+                "server_product_code": null,
+                "ops_status": null,
+                "customer_id": null,
+                "channel_code": null,
+                "ops_type": 0,
+                "ops_time_start": 0,
+                "ops_time_end": 0,
+                "country_code": null,
+                "server_code": ""
+            },
+            "pager": {
+                "total": 0,
+                "index": 0,
+                "size": 20000
+            }
+        },
+        "url": "https://oms2api.yunexpress.com/business/predictorder/Query"
+    },
+    "osm_export_query": {
+        "describe": "预报订单管理界面导出查询，从下载中心下载导出文件",
+        "search_parm_describe1": "task_batch 为查询的ID，用于在查询结果中找到对应的查询",
+        "search_parm_describe2": "total_count导出总量、create_name导出操作人、task_type导出类型",
+        "search_parm_describe3": "json_parameter 需要导出的查询，放在entity-parameter中，使用json.dump",
+        "headers": {
+            "__lang": "zh-cn",
+            "Authorization": "",
+            "Content-Type": "application/json;charset=utf-8",
+            "Host": "oms2api.yunexpress.com",
+            "Content-Length": "1047",
+            "Connection": "Close"
+        },
+        "json_": {
+            "entity": {
+                "task_id": 0,
+                "body_id": 0,
+                "task_batch": null,
+                "task_type": "",
+                "total_count": "",
+                "parameter": null,
+                "task_status": 0,
+                "download_url": null,
+                "remark": null,
+                "create_name": "self.operator_name",
+                "create_id": 0,
+                "createon": 0,
+                "updateon": null,
+                "starton": null,
+                "endon": null,
+                "success_count": null,
+                "failure_count": null,
+                "takeuptime": ""
+            }
+        },
+        "json_parameter": {
+            "body_id": 0,
+            "import_url": null,
+            "page_size": 0,
+            "page_current": 0,
+            "codes": null,
+            "server_product_code": null,
+            "ops_status": null,
+            "customer_id": null,
+            "channel_code": "",
+            "ops_type": 0,
+            "ops_time_start": 0,
+            "ops_time_end": 0,
+            "country_code": null,
+            "server_code": ""
+        },
+        "url": "https://oms2api.yunexpress.com/business/tskcenter/AddTaskDownloadCentersInfo"
+    },
+    "ops_data_query": {
+        "headers": {
+            "Host": "ops.server.yunexpress.com",
+            "User-Agent": "Fiddler-Everywhere",
+            "Content-Length": "2020",
+            "Accept-Encoding": "gzip, deflate",
+            "X-Client-Version": "0.0.0",
+            "X-Client-Channel": "YT-PRO",
+            "X-Client-IP": "2.0.0.1",
+            "X-Client-UserName": null,
+            "X-Authorization": "",
+            "Accept": "application/json",
+            "Content-Type": "application/json;charset=utf-8",
+            "Expect": "100-continue",
+            "Connection": "Keep-Alive"
+        },
+        "json_": {
+            "requestId": null,
+            "Item": {
+                "export_total_volume": "false",
+                "order_id": 0,
+                "HawbCode": null,
+                "HawbCodeList": null,
+                "HawCode_Type": "DH",
+                "DateTimeType": 0,
+                "StratDateTime": null,
+                "EndDateTime": null,
+                "OG_ID": null,
+                "og_ids": null,
+                "Og_Code_List": null,
+                "Customer_ID": null,
+                "Server_Channelid": null,
+                "Product_Id": null,
+                "Server_id": null,
+                "Country_Code": null,
+                "Operation_Status": null,
+                "Operation_Status_List": null,
+                "Hold_Status": null,
+                "pageIndex": 1,
+                "pageSize": 20000,
+                "status_code": null,
+                "status_code_list": null,
+                "Printer": null,
+                "CheckIn_Op": null,
+                "CheckOut_Op": null,
+                "Product_Group": null,
+                "Product_Group_List": null,
+                "ChannelOperationType": null,
+                "ChannelOperationTypeList": null,
+                "saler_id": "",
+                "saler_code": "",
+                "saler_type": 0,
+                "category_code_list": null,
+                "create_id": null,
+                "is_hold": null,
+                "OperatorNumber": null,
+                "MacAddress": null,
+                "IpAddress": null
+            }
+        },
+        "url": "http://ops.server.yunexpress.com/OptOrderData/OperationDataQuery"
+    },
+    "download_center_query": {
+        "headers": {
+            "__lang": "zh-cn",
+            "Authorization": "",
+            "Content-Type": "application/json;charset=utf-8",
+            "Host": "oms2api.yunexpress.com",
+            "Content-Length": "146",
+            "Expect": "100-continue",
+            "Connection": "Close"
+        },
+        "json_": {
+            "condition": {
+                "task_type": "",
+                "task_status": 4,
+                "startdate": null,
+                "enddate": null,
+                "pagesize": 500,
+                "pagecurrent": 1,
+                "create_name": null
+            }
+        },
+        "url": "https://oms2api.yunexpress.com/business/tskcenter/GetDownloadCenterPagelist"
+    },
+    "channel_id_query": {
+        "headers": {
+            "Host": "ops.server.yunexpress.com",
+            "User-Agent": "Fiddler-Everywhere",
+            "Content-Length": "2020",
+            "Accept-Encoding": "gzip, deflate",
+            "X-Client-Version": "0.0.0",
+            "X-Client-Channel": "YT-PRO",
+            "X-Client-IP": "2.0.0.1",
+            "X-Client-UserName": null,
+            "X-Authorization": "",
+            "Accept": "application/json",
+            "Content-Type": "application/json;charset=utf-8",
+            "Expect": "100-continue",
+            "Connection": "Keep-Alive"
+        },
+        "json_": {
+            "requestId": null,
+            "Item": {
+                "server_channelid": null,
+                "channel_code": null,
+                "channel_name": null,
+                "status": null,
+                "plc_code": null,
+                "pageIndex": 0,
+                "pageSize": 0,
+                "isBindLine": null,
+                "auditStatus": null,
+                "server_id": null,
+                "sign_channel_code": null,
+                "category_code": null,
+                "goods_attributes": null,
+                "shipper_labelcode_rule": null,
+                "bgs_id": 0,
+                "area_code": null,
+                "sorting_service_code": null,
+                "txtContent": null,
+                "channel_codes": null,
+                "page_size": 0,
+                "page_index": 0
+            }
+        },
+        "url": "http://ops.server.yunexpress.com/ServerChannel/FindServerChannelBasicData"
+    },
+    "translate_dic": {
+        "order_id": "系统订单ID",
+        "bot_code": "操作状态码",
+        "bot_name": "操作状态",
+        "is_hold": "是否扣件",
+        "customer_id": "客户ID",
+        "customer_code": "客户代码",
+        "customer_shortname": "客户名称",
+        "shipper_hawbcode": "运单号",
+        "refer_hawbcode": "订单号",
+        "server_hawbcode": "跟踪号",
+        "country_code": "国家代码",
+        "checkin_grossweight": "称重重量",
+        "shipper_chargeweight": "计费重量",
+        "server_chargeweight": "服务商计费重",
+        "shipper_pieces": "收货件数",
+        "product_id": "产品ID",
+        "product_cnname": "产品名称",
+        "server_channelid": "渠道ID",
+        "server_channel_cnname": "渠道名称",
+        "server_id": "服务商ID",
+        "server_shortname": "服务商简称",
+        "pl_id": "pl_id",
+        "pl_name": "pl_name",
+        "checkin_id": "签入ID",
+        "checkin_time": "签入时间",
+        "checkout_id": "签出ID",
+        "checkout_time": "签出时间",
+        "ship_date": "发货日期",
+        "bag_labelcode": "bag_labelcode",
+        "ship_batchcode": "ship_batchcode",
+        "tra_batchcode": "tra_batchcode",
+        "country_cnname": "国家名称",
+        "status_cnname": "中转状态",
+        "bill_status": "账单状态",
+        "volumecount": "volumecount",
+        "arrival_date": "到货时间",
+        "tra_batch_code": "tra_batch_code",
+        "ship_labelcode": "ship_labelcode",
+        "ship_time": "发货日期",
+        "log_create_time": "本地创建时间",
+        "log_note": "log_note",
+        "change_time": "change_time",
+        "print_date": "print_date",
+        "printer_id": "printer_id",
+        "og_id": "收货点ID",
+        "og_name": "收货点",
+        "productgroup_cnname": "产品组中文名",
+        "consignee_postcode": "邮编",
+        "sorting_time": "sorting_time",
+        "back_checkouttime": "退货出库时间",
+        "productgroup_code": "产品组代码",
+        "salesman_name": "业务员",
+        "customer_service_name": "客服",
+        "channel_operation_type": "channel_operation_type",
+        "order_status": "order_status",
+        "channel_type_name": "渠道类型",
+        "shipment_order_number": "shipment_order_number",
+        "transit_code": "transit_code",
+        "total_volume": "total_volume",
+        "category_code": "category_code",
+        "category_name": "category_name",
+        "volume_coefficient": "volume_coefficient",
+        "weight": "weight",
+        "checkin_volumeweight": "checkin_volumeweight",
+        "checkin_name": "checkin_name",
+        "operation_status": "operation_status",
+        "finaly_server_channelid": "finaly_server_channelid",
+        "operation_name": "operation_name",
+        "operation_time": "operation_time",
+        "error_message": "error_message",
+        "error_count": "error_count",
+        "result_status": "result_status",
+        "ocoa_id": "ocoa_id",
+        "checkin_data": "checkin_data",
+        "is_dangerous": "is_dangerous"
+    },
+    "pre_monitor": {
+        "url": "https://oms2api.yunexpress.com/business/predictorder/SearchPreMonitor",
+        "headers": {
+            "Content-Type": "application/json; charset=utf-8",
+            "Host": "oms2api.yunexpress.com",
+            "Content-Length": "232",
+            "Expect": "100-continue",
+            "Connection": "Close"
+        },
+        "json_": {
+            "query": {
+                "Ids": null,
+                "codes": null,
+                "pre_status": 20,
+                "customer_id": null,
+                "channel_code": "",
+                "time_start": 0,
+                "time_end": 0,
+                "country_code": "",
+                "createby": "",
+                "forcast_order_type": null
+            },
+            "pager": {
+                "total": 0,
+                "index": 0,
+                "size": 50
+            }
+        },
+        "export_parm": {
+            "body_id": 0,
+            "import_url": null,
+            "page_size": 0,
+            "page_current": 0,
+            "time_zone": {
+                "time_zone": 28800.0,
+                "daylight_zone": 0.0,
+                "daylight_start": null,
+                "daylight_end": null
+            }
+        }
+    },
+    "operational_data_query": {
+        "url": "http://ops.server.yunexpress.com/OptOrderData/FinOptOrderData",
+        "headers": {
+            "Host": "ops.server.yunexpress.com",
+            "User-Agent": "Fiddler-Everywhere",
+            "Content-Length": "1309",
+            "Content-Type": "application/json; charset=utf-8",
+            "Accept-Encoding": "gzip, deflate",
+            "X-Client-Version": "0.0.0",
+            "X-Client-Channel": "YT-PRO",
+            "X-Client-Menu": "%e6%93%8d%e4%bd%9c%e6%95%b0%e6%8d%ae%e6%9f%a5%e8%af%a2",
+            "X-Client-IP": "2.0.0.1",
+            "X-Client-UserName": null,
+            "X-Authorization": "",
+            "Accept": "application/json",
+            "Expect": "100-continue",
+            "Connection": "Keep-Alive"
+        },
+        "json_": {
+            "requestId": "8dc8bf0ffedc4a2e9dc4729198bde385",
+            "Item": {
+                "export_total_volume": false,
+                "order_id": 0,
+                "HawbCode": null,
+                "HawbCodeList": [],
+                "HawCode_Type": "DH",
+                "DateTimeType": 0,
+                "StratDateTime": null,
+                "EndDateTime": null,
+                "OG_ID": null,
+                "og_ids": null,
+                "Og_Code_List": null,
+                "Customer_ID": null,
+                "Server_Channelid": null,
+                "Product_Id": null,
+                "Server_id": null,
+                "Country_Code": null,
+                "Operation_Status": null,
+                "Operation_Status_List": null,
+                "Hold_Status": null,
+                "pageIndex": 1,
+                "pageSize": 10000,
+                "status_code": null,
+                "status_code_list": null,
+                "Printer": null,
+                "CheckIn_Op": null,
+                "CheckOut_Op": null,
+                "Product_Group": null,
+                "Product_Group_List": null,
+                "ChannelOperationType": null,
+                "ChannelOperationTypeList": null,
+                "saler_id": null,
+                "saler_code": null,
+                "saler_type": 0,
+                "category_code_list": null,
+                "create_id": null,
+                "is_hold": null,
+                "OperatorNumber": null,
+                "MacAddress": "00:FF:3D:00:A5:AB",
+                "IpAddress": "2.0.0.1"
+            }
+        }
+    },
+    "basic_data_channel_query": {
+        "url": "",
+        "headers": {
+            "Accept-Encoding": "gzip,deflate"
+        },
+        "json_": null
+    },
+    "online_order_query": {
+        "url": "https://oms2api.yunexpress.com/business/orderquery/search",
+        "headers": {
+            "Content-Type": "application/json; charset=utf-8",
+            "Host": "oms2api.yunexpress.com",
+            "Content-Length": "545",
+            "Expect": "100-continue",
+            "Connection": "Close"
+        },
+        "json_": {
+            "query": {
+                "codes": [],
+                "time_type": 0,
+                "timestamp_start": 0,
+                "timestamp_end": 0,
+                "customer_id": 0,
+                "product_code": null,
+                "country_code": null,
+                "salesman_id": null,
+                "order_status": null,
+                "is_intercept": null,
+                "source_code": null,
+                "customer_service_id": 0,
+                "is_historycode": false,
+                "channel_code": null
+            },
+            "pager": {
+                "total": 0,
+                "index": 0,
+                "size": 10000
+            }
+        }
+    },
+    "channel_query": {
+        "url": "http://ops.server.yunexpress.com/SpServerAudit/GetSvrServerChannelAuditDataPage",
+        "headers": {
+            "Host": "ops.server.yunexpress.com",
+            "User-Agent": "Fiddler-Everywhere",
+            "Content-Length": "434",
+            "Accept-Encoding": "gzip, deflate",
+            "X-Client-Version": "0.0.0",
+            "X-Client-Channel": "YT-PRO",
+            "X-Client-Menu": "%e6%9c%8d%e5%8a%a1%e6%b8%a0%e9%81%93%ef%bc%88%e6%96%b0%ef%bc%89-OPS",
+            "X-Client-IP": "2.0.0.1",
+            "X-Client-UserName": "ZT24502",
+            "Accept": "application/json",
+            "Content-Type": "application/json; charset=utf-8",
+            "Expect": "100-continue"
+        },
+        "json_": {
+            "requestId": null,
+            "Item": {
+                "server_channelid": "",
+                "channel_code": null,
+                "channel_name": "",
+                "status": 1,
+                "plc_code": null,
+                "pageIndex": 1,
+                "pageSize": 5000,
+                "isBindLine": "",
+                "auditStatus": "",
+                "server_id": "",
+                "sign_channel_code": "",
+                "category_code": "",
+                "goods_attributes": "",
+                "shipper_labelcode_rule": "",
+                "bgs_id": 0,
+                "area_code": null,
+                "sorting_service_code": "",
+                "txtContent": null,
+                "channel_codes": [],
+                "page_size": 0,
+                "page_index": 0
+            }
+        }
+    },
+    "staff_id_query": {
+        "url": "http://ops.server.yunexpress.com/UsrStaff/GetStaffByPage",
+        "headers": {
+            "Accept-Encoding": "gzip, deflate",
+            "X-Client-Version": "0.0.0",
+            "X-Client-Channel": "YT-PRO",
+            "X-Client-Menu": "%e6%b8%a0%e9%81%93%e4%bf%ae%e6%94%b9%e8%ae%b0%e5%bd%95",
+            "X-Client-IP": "2.0.0.1",
+            "X-Client-UserName": null,
+            "Accept": "application/json",
+            "Content-Type": "application/json; charset=utf-8",
+            "Host": "ops.server.yunexpress.com",
+            "Content-Length": "444",
+            "Expect": "100-continue",
+            "Connection": "Keep-Alive"
+        },
+        "json_": {
+            "requestId": null,
+            "Item": {
+                "st_id": 0,
+                "st_code": null,
+                "st_dingtalk_code": null,
+                "st_code_type": null,
+                "vs_code": null,
+                "og_id": null,
+                "st_name": "",
+                "st_ename": null,
+                "create_id": 0,
+                "create_time": "0001-01-01T00:00:00",
+                "update_id": null,
+                "update_name": null,
+                "update_time": "0001-01-01T00:00:00",
+                "pageIndex": 1,
+                "pageSize": 20000,
+                "vs_name": null,
+                "og_name": null,
+                "current_og_name": null,
+                "current_og_id": null,
+                "og_ids": null,
+                "og_shortcode": null
+            }
+        }
+    },
+    "channel_change_query": {
+        "url": "http://ops.server.yunexpress.com/ServerChannel/PageGetUpdateServerChannelInfo",
+        "headers": {
+            "Accept-Encoding": "gzip, deflate",
+            "X-Client-Version": "0.0.0",
+            "X-Client-Channel": "YT-PRO",
+            "X-Client-Menu": "%e6%b8%a0%e9%81%93%e4%bf%ae%e6%94%b9%e8%ae%b0%e5%bd%95",
+            "X-Client-IP": "2.0.0.1",
+            "X-Client-UserName": null,
+            "Accept": "application/json",
+            "Content-Type": "application/json; charset=utf-8",
+            "Host": "ops.server.yunexpress.com",
+            "Content-Length": "50068",
+            "Expect": "100-continue",
+            "Connection": "Keep-Alive"
+        },
+        "json_": {
+            "requestId": null,
+            "Item": {
+                "HawbCodeList": [],
+                "channel_Type": null,
+                "channel_id": null,
+                "start_time": null,
+                "start_time_utc": null,
+                "end_time": null,
+                "end_time_utc": null,
+                "create_id": null,
+                "pageIndex": 1,
+                "pageSize": 5000
+            }
+        }
+    },
+    "worker_id_query": {
+        "url": "http://ops.server.yunexpress.com/UsrStaff/GetStaffByPage",
+        "headers": {
+            "Host": "ops.server.yunexpress.com",
+            "Content-Type": "application/json; charset=utf-8",
+            "Content-Length": "472",
+            "Accept-Encoding": "gzip, deflate",
+            "Accept-Language": "zh_CN",
+            "timezone": "8",
+            "Accept": "application/json",
+            "Expect": "100-continue",
+            "Connection": "Close"
+        },
+        "json_": {
+            "requestId": "53b8294bfb024f0482dca5d703984565",
+            "Item": {
+                "st_id": 0,
+                "st_code": null,
+                "st_dingtalk_code": null,
+                "st_code_type": null,
+                "vs_code": null,
+                "og_id": null,
+                "st_name": null,
+                "st_ename": null,
+                "create_id": 0,
+                "create_time": "0001-01-01T00:00:00",
+                "update_id": null,
+                "update_name": null,
+                "update_time": "0001-01-01T00:00:00",
+                "pageIndex": 1,
+                "pageSize": 50,
+                "vs_name": null,
+                "og_name": null,
+                "current_og_name": null,
+                "current_og_id": null,
+                "og_ids": null,
+                "og_shortcode": null
+            },
+            "UtcOffset": "UTC+08:00"
+        }
+    },
+    "channel_list_query": {
+        "url": "http://ops.server.yunexpress.com/ServerChannel/FindServerChannelBasicData",
+        "headers": {
+            "Accept-Encoding": "gzip, deflate",
+            "Accept-Language": "zh_CN",
+            "timezone": "8",
+            "Accept": "application/json",
+            "Content-Type": "application/json; charset=utf-8",
+            "Host": "ops.server.yunexpress.com",
+            "Content-Length": "531",
+            "Expect": "100-continue",
+            "Connection": "Keep-Alive"
+        },
+        "json_": {
+            "requestId": "3cfe5887829b485fabecb807689bf533",
+            "Item": {
+                "server_channelid": null,
+                "channel_code": null,
+                "channel_name": null,
+                "status": null,
+                "plc_code": null,
+                "pageIndex": 0,
+                "pageSize": 0,
+                "isBindLine": null,
+                "auditStatus": null,
+                "server_id": null,
+                "sign_channel_code": null,
+                "category_code": null,
+                "goods_attributes": null,
+                "shipper_labelcode_rule": null,
+                "bgs_id": 0,
+                "area_code": null,
+                "sorting_service_code": null,
+                "txtContent": null,
+                "channel_codes": null,
+                "product_linename": null,
+                "bag_custom_lable_id": null,
+                "page_size": 0,
+                "page_index": 0
+            },
+            "UtcOffset": "UTC+08:00"
+        }
+    },
+    "change_channel_upload": {
+        "url": "http://ops.server.yunexpress.com/ServerChannel/UpdateServerChannelInfo",
+        "headers": {
+            "Accept-Encoding": "gzip, deflate",
+            "Accept-Language": "zh_CN",
+            "timezone": "8",
+            "Accept": "application/json",
+            "Content-Type": "application/json; charset=utf-8",
+            "Host": "ops.server.yunexpress.com",
+            "Content-Length": "325",
+            "Expect": "100-continue"
+        },
+        "json_": {
+            "requestId": "a77ee62790414161a2fddf8cb6a3230b",
+            "Item": {
+                "ScanOrder": "",
+                "ServerChannelId": 47800,
+                "Note": "批量上传修改",
+                "Og_Id": 2,
+                "OperatorId": 210762,
+                "OperatorTime": "2025-08-14 09:22:06",
+                "IsUpdate": "Y",
+                "IsVerifyNote": false,
+                "isSupportChannelVerify": false,
+                "IsLockOldChannel": false,
+                "OldChannelId": 0
+            },
+            "UtcOffset": "UTC+08:00"
+        }
+    }
+}

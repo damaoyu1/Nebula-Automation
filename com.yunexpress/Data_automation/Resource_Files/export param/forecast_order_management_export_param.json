@@ -1,0 +1,20 @@
+{
+  "Documentation": "本文件为星云系统预报订单管理，导出下载json参数",
+  "Documentation2": "codes, 搜索运单号需要填写的参数，使用list数据类型",
+  "json_param": {
+    "body_id": 0,
+    "import_url": null,
+    "page_size": 0,
+    "page_current": 0,
+    "codes": null,
+    "server_product_code": null,
+    "ops_status": null,
+    "customer_id": null,
+    "channel_code": "",
+    "ops_type": 0,
+    "ops_time_start": 0,
+    "ops_time_end": 0,
+    "country_code": null,
+    "server_code": ""
+  }
+}

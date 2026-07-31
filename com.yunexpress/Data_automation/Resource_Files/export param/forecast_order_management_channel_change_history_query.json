@@ -1,0 +1,25 @@
+{
+  "json_": {
+    "query": {
+        "codes": null,
+        "channel_code": "",
+        "nchannel_code": "",
+        "create_start": 1734883200,
+        "create_end": 1734969599
+    },
+    "pager": {
+        "total": 0,
+        "index": 0,
+        "size": 10000
+    }
+  },
+  "headers": {
+    "__lang": "zh-cn",
+    "Content-Type": "application/json; charset=utf-8",
+    "Host": "oms2api.yunexpress.com",
+    "Content-Length": "154",
+    "Expect": "100-continue",
+    "Connection": "Close"
+  },
+  "url": "https://oms2api.yunexpress.com/business/predictorder/SearchChannelRecord"
+}

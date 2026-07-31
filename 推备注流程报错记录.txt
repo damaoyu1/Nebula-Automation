@@ -1,0 +1,23 @@
+ File "C:\Users\王樱樵\Desktop\Nebula-Automation\com.yunexpress\Data_automation\Main.py", line 65, in <module>
+    main()
+  File "C:\Users\王樱樵\Desktop\Nebula-Automation\com.yunexpress\Data_automation\Main.py", line 39, in main
+    interceptor.start()
+  File "C:\Users\王樱樵\Desktop\Nebula-Automation\com.yunexpress\Data_automation\Table_and_Calculator\Automatic_Interceptor.py", line 49, in start
+    self.pl_interception()
+  File "C:\Users\王樱樵\Desktop\Nebula-Automation\com.yunexpress\Data_automation\Table_and_Calculator\Automatic_Interceptor.py", line 232, in pl_interception
+    pl_table = self.download_failed_country_address("PL")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\王樱樵\Desktop\Nebula-Automation\com.yunexpress\Data_automation\Table_and_Calculator\Automatic_Interceptor.py", line 155, in download_failed_country_address
+    osm_export_query.osm_export_query(osm_query)
+  File "C:\Users\王樱樵\Desktop\Nebula-Automation\com.yunexpress\Data_automation\QueryMethod\Query.py", line 126, in osm_export_query
+    self.query_json_params["ops_time_start"] = self.time_calculate.calculate(search_query.time_start)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\王樱樵\Desktop\Nebula-Automation\com.yunexpress\Data_automation\Table_and_Calculator\TimeCalculator.py", line 15, in calculate
+    date = datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\王樱樵\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\王樱樵\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 349, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+ValueError: time data '' does not match format '%Y-%m-%d %H:%M:%S'

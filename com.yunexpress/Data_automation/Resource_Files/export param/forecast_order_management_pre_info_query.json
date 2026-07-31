@@ -1,0 +1,32 @@
+{
+  "Documentation": "本文件为星云系统预报订单管理，默认菜单的各项信息的查询，渠道、客户、产品等",
+
+  "url": "https://oms2api.yunexpress.com/business/commonapi/do",
+
+  "headers": {
+    "__lang": "zh-cn",
+    "Content-Type": "application/json; charset=utf-8",
+    "Host": "oms2api.yunexpress.com",
+    "Content-Length": "136",
+    "Expect": "100-continue",
+    "Connection": "Close"
+  },
+
+  "json_for_product": {
+    "serv": "Common",
+    "sub": "SearchBasicDataScrollAsync",
+    "req": "{\"request\":{\"query\":\"\",\"source\":1,\"type\":1}}"
+  },
+
+  "json_for_country_code": {
+    "serv": "Common",
+    "sub": "SearchBasicDataScrollAsync",
+    "req": "{\"request\":{\"query\":\"\",\"source\":1,\"type\":8}}"
+  },
+
+  "json_for_order_status": {
+    "serv": "Common",
+    "sub": "GetSystemDic",
+    "req": "{\"group\":\"order_status\"}"
+  }
+}
