@@ -23,7 +23,7 @@ def main():
     choose_process = input(
         "(超期、渠道测试、导出重复预报监控数据、)\n"
         "(匹配报错简因、导出推送备注订单、导出重复预报监控文件的操作数据、质检)\n"
-        "(导出标快数据、导出自动转渠道记录、批量上传修改订单渠道)>>>>>")
+        "(导出标快数据、导出自动转渠道记录、批量上传修改订单渠道、修改账户和工号)>>>>>")
     print("导出时不能在星云系统导出其他数据，否则会报错")
     if choose_process == "渠道测试":
         Tp.TableProcess.channel_testing_report_generation()
@@ -53,6 +53,8 @@ def main():
     elif choose_process == "批量上传修改订单渠道":
         process_query = Channel_Change.BatchChannelChange()
         process_query.start()
+    elif choose_process == "修改账户和工号":
+        user_set.change_user_info()
     else:
         print("输入名称有误")
 
