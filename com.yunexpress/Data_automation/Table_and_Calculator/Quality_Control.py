@@ -26,8 +26,11 @@ class QualityControl:
 
     def __init__(self):
         self.loading = Lc.PrintLoadingCircle()
-        self.year = datetime.datetime.now().year
-        self.month = datetime.datetime.now().month
+        self.target_date: datetime.date = datetime.date.today()
+        self.shift_type: str = "白班"
+        self.data_date: datetime.date = self.target_date
+        self.year = self.data_date.year
+        self.month = self.data_date.month
         self.public_path = f"\\\\10.83.5.66\\地址订正组\\地址订正组\\API数据存底\\{self.year}年\\API修改存底-{self.year}"
         self.file_table: pd.DataFrame = pd.DataFrame()
         self.count = 0
@@ -50,9 +53,69 @@ class QualityControl:
         self.staff_id_table = staff_query.table
         self.staff_id_table = self.staff_id_table[["st_id", "st_name"]]
 
+    def choose_date(self) -> bool:
+        while True:
+            date_input = input("输入质检日期（默认今天，格式 2026-10-17）>>").strip()
+            if not date_input:
+                target_date = datetime.date.today()
+            else:
+                try:
+                    target_date = datetime.datetime.strptime(date_input, "%Y-%m-%d").date()
+                except ValueError:
+                    print("日期格式有误，请按 2026-10-17 的格式输入")
+                    continue
+
+            today = datetime.date.today()
+            if target_date > today:
+                print("不能选择未来日期")
+                continue
+
+            days_before = (today - target_date).days
+            if days_before > 7:
+                print(f"目标日期距今 {days_before} 天，已超过 7 天")
+                print("注意：修改后地址取星云系统当前值，历史数据可能失真")
+                confirm = input("仍要继续？(y/N)>>").strip().lower()
+                if confirm != "y":
+                    continue
+
+            while True:
+                shift_input = input(
+                    "请选择班次：1=白班（全部线路） 2=夜班（仅英线+夜班标快，数据取前一日）>>").strip()
+                if shift_input in ("", "1"):
+                    shift_type = "白班"
+                    break
+                if shift_input == "2":
+                    shift_type = "夜班"
+                    break
+                print("输入有误，请输入 1 或 2")
+
+            self.target_date = target_date
+            self.shift_type = shift_type
+            self.data_date = target_date - datetime.timedelta(days=1) \
+                if shift_type == "夜班" else target_date
+            self.year = self.data_date.year
+            self.month = self.data_date.month
+            self.public_path = (
+                f"\\\\10.83.5.66\\地址订正组\\地址订正组\\API数据存底\\"
+                f"{self.year}年\\API修改存底-{self.year}"
+            )
+            print(f"质检日期：{self.target_date}  班次：{self.shift_type}")
+            if self.shift_type == "夜班":
+                print(f"数据源日期：{self.data_date}（英线 + 夜班标快）")
+            return True
+
     def start(self):
+        if not self.choose_date():
+            return
         self.loading.start("正在查找文件")
         self.read_public_folder()
+        if self.file_table.empty:
+            self.loading.stop()
+            if self.shift_type == "夜班":
+                print(f"\n未找到 {self.data_date} 的英线/夜班标快文件，请确认该日期是否已导出数据")
+            else:
+                print(f"\n未找到 {self.target_date} 的原版文件，请确认该日期是否已导出数据")
+            return
         print("\n 查找完毕")
         self.loading.update_text("正在合并表格")
         self.merge_original_tables()
@@ -71,16 +134,27 @@ class QualityControl:
     def read_public_folder(self):
         threads = []
         if os.path.exists(self.public_path):
-            path = self.public_path
+            if self.shift_type == "夜班":
+                path_list = [
+                    os.path.join(self.public_path, "三纵英线"),
+                    os.path.join(self.public_path, "标快数据", "原版"),
+                ]
+            else:
+                path_list = [self.public_path]
         else:
-            path = Tp.TableProcess.resource_folder() + "预报失败原版\\"
-        for root, dirs, files in os.walk(path):
-            new_thread = threading.Thread(
-                target=self.read_file_thread_level1, args=(root, files))
-            threads.append(new_thread)
-            new_thread.start()
+            path_list = [Tp.TableProcess.resource_folder() + "预报失败原版\\"]
+        for path in path_list:
+            for root, dirs, files in os.walk(path):
+                new_thread = threading.Thread(
+                    target=self.read_file_thread_level1, args=(root, files))
+                threads.append(new_thread)
+                new_thread.start()
         for t in threads:
             t.join()
+
+        if not self.all_file_dict:
+            self.file_table = pd.DataFrame()
+            return
 
         table = Tp.TableProcess.thread_dict_to_table(self.all_file_dict)
         table["日期校验"] = table.apply(
@@ -91,14 +165,26 @@ class QualityControl:
         table["日期"] = table.apply(
             lambda row: self.creation_date_verification(str(row["日期校验"])), axis=1)
         table = table[table["file_name"].str.contains("原版")]
-        table["日期"] = table.apply(
-            lambda row: self. night_shift_date_calculation(row["file_name"], row["日期"]), axis=1)
-        table["日期"] = pd.to_datetime(table["日期"])
-        today = datetime.datetime.today()
-        table = table[table["日期"].dt.date == today.date()]
+
+        if self.shift_type == "夜班":
+            # 夜班：英线取全部原版文件，标快只取夜班文件；日期按文件名原值匹配数据源日期
+            is_biao_kuai = table["file_path"].str.contains("标快数据")
+            table = table[(~is_biao_kuai) | table["file_name"].str.contains("夜")]
+            table["日期"] = pd.to_datetime(table["日期"])
+            table = table[table["日期"].dt.date == self.data_date]
+            if not table.empty and table[table["file_path"].str.contains("标快数据")].empty:
+                print(f"\n⚠ 未找到 {self.data_date} 的夜班标快文件，本次夜班质检不含标快数据")
+        else:
+            table["日期"] = table.apply(
+                lambda row: self. night_shift_date_calculation(row["file_name"], row["日期"]), axis=1)
+            table["日期"] = pd.to_datetime(table["日期"])
+            table = table[table["日期"].dt.date == self.target_date]
+
         self.file_table = table
 
-        Tp.TableProcess.write_existing_excel_with_time_head("质检测试 文件列表", table, "Sheet")
+        suffix = "-夜班" if self.shift_type == "夜班" else ""
+        Tp.TableProcess.write_existing_excel_with_time_head(
+            f"质检测试 文件列表-{self.target_date}{suffix}", table, "Sheet")
 
     def night_shift_date_calculation(self, file_name: str, file_date: datetime.datetime) -> datetime.datetime:
         if "夜" in file_name:
@@ -155,10 +241,10 @@ class QualityControl:
             self.modified_table = pd.concat([self.modified_table, table], ignore_index=True)
 
     def export_channel_change_records(self):
-        time_now = datetime.datetime.now()
-        time_now = str(time_now).split('.')[0]
-        time_start = datetime.datetime.strptime(time_now, "%Y-%m-%d %H:%M:%S")
-        time_start = str(time_start - datetime.timedelta(days=7))
+        time_now = datetime.datetime.combine(self.target_date, datetime.time(23, 59, 59))
+        time_start = time_now - datetime.timedelta(days=7)
+        time_now = str(time_now)
+        time_start = str(time_start)
         worker_table: pd.DataFrame = Tp.TableProcess.read_worker_table()
         worker_no_list = worker_table['工号'].tolist()
         main_query = NebulaSearchQuery.NebulaSearchQuery()
@@ -225,10 +311,7 @@ class QualityControl:
 
     def read_file_thread_level1(self, root, files):
         threads = []
-        if self.month != 1:
-            last_month = self.month - 1
-        else:
-            last_month = self.month
+        last_month = 12 if self.month == 1 else self.month - 1
         if f"{self.month}月" in os.path.basename(root) or f"{last_month}月" in os.path.basename(root):
             for file in files:
                 new_thread = threading.Thread(
@@ -281,8 +364,9 @@ class QualityControl:
             axis=1)
         self.quality_control_table["邮编差异"] = self.quality_control_table.apply(
             lambda row: self.zipcode_difference_verification(str(row["原版 邮编"]), str(row["修改 邮编"])), axis=1)
+        suffix = "-夜班" if self.shift_type == "夜班" else ""
         file_name = Tp.TableProcess.write_existing_excel_with_time_head(
-            "质检表格", self.quality_control_table, "Sheet")
+            f"质检表格-{self.target_date}{suffix}", self.quality_control_table, "Sheet")
         Tp.TableProcess.write_existing_excel(file_name, self.channel_change_table, "渠道修改质检")
         Tp.TableProcess.write_existing_excel(file_name, self.channel_change_table_raw_data, sheet_name="渠道修改原始数据")
 
